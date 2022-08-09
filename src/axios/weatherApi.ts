@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import api from '@/axios';
-import { ILocation, IListResponse, IWeatherResponse } from '@/types';
+import { IListResponse, ILocation, IWeatherResponse } from '@/interfaces';
 
 
 const weatherApi = {

@@ -2,8 +2,9 @@ import React from 'react';
 
 import WeatherItem from '@/components/WeatherItem';
 import { useTypedSelector } from '@/hooks/storeHooks';
+import { IWeather } from '@/interfaces';
 
-import { WeatherItemsWrapper, WeatherWrapper } from './components';
+import { WeatherItemsWrapper, WeatherWrapper } from './styled';
 
 
 const Weather = () => {
@@ -13,7 +14,7 @@ const Weather = () => {
     <WeatherWrapper>
       <WeatherItem dayParams={currentWeather} currentItem />
       <WeatherItemsWrapper>
-        {weather.map(day => (
+        {weather.map((day: IWeather) => (
           <WeatherItem dayParams={day} key={day.datetime} />
         ))}
       </WeatherItemsWrapper>

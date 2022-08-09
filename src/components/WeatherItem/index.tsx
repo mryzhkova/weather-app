@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
-import { getDay, getImages } from '@/helpers';
+import { getWeekDay, getImages } from '@/helpers';
 
-import { StyledDay, StyledTemp, WeatherItemWrapper } from './components';
-import { IProps } from './types';
+import { IProps } from './interfaces';
+import { StyledDay, StyledIcon, StyledTemp, WeatherItemWrapper } from './styled';
 
 
 const WeatherItem: FC<IProps> = ({ dayParams, currentItem }): JSX.Element => {
@@ -11,12 +11,12 @@ const WeatherItem: FC<IProps> = ({ dayParams, currentItem }): JSX.Element => {
 
   const { icon } = getImages(description);
 
-  const day = getDay(datetime);
+  const day = getWeekDay(datetime);
 
   return (
     <WeatherItemWrapper currentItem={currentItem}>
       <StyledDay currentItem={currentItem}>{currentItem ? 'today' : day}</StyledDay>
-      <img src={icon} alt="icon" />
+      <StyledIcon currentItem={currentItem} src={icon} alt="icon" />
       <StyledTemp currentItem={currentItem}>
         {Math.round(temp)}
         &deg;

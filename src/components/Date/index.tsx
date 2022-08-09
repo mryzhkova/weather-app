@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { DayWrapper, StyledDate, StyledTime } from './components';
+import { getDay, getTime } from '@/helpers';
+
+import { DayWrapper, StyledDate, Time } from './styled';
 
 
 const Clock = (): JSX.Element => {
@@ -13,25 +15,16 @@ const Clock = (): JSX.Element => {
     };
   }, []);
 
-  const time = date.toLocaleString('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  });
+  const { time, timeFormat } = getTime(date);
 
-  const day = date.toLocaleDateString('en-GB', {
-    day: 'numeric',
-    weekday: 'long',
-    month: 'long',
-    year: 'numeric',
-  });
+  const day = getDay(date);
 
   return (
     <DayWrapper>
-      <StyledTime>
-        <span>{time.slice(0, -2)}</span>
-        {time.slice(-2)}
-      </StyledTime>
+      <div>
+        <Time>{time}</Time>
+        <span>{timeFormat}</span>
+      </div>
       <StyledDate>{day}</StyledDate>
     </DayWrapper>
   );

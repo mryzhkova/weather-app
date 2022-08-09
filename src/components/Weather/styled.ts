@@ -7,7 +7,8 @@ export const WeatherWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.gray09};
-  padding: 0 45px;
+  padding: ${({ theme }) => theme.spaces[0]}px
+    ${({ theme }) => theme.spaces[5]}px;
   ${({ theme }) => theme.below.md`
     flex-direction: column;
     height: auto;
@@ -17,6 +18,6 @@ export const WeatherWrapper = styled.div`
 export const WeatherItemsWrapper = styled.div`
   display: flex;
   ${({ theme }) => theme.below.md`
-    margin: 20px 0;
+    margin: ${theme.spaces[4]}px 0;
   `}
 `;

@@ -1,10 +1,11 @@
 import * as icons from '@/assets/icons';
 import * as imgs from '@/assets/images';
-import { Desriptions } from '@/constants';
-import { ILocation, TPayloadAction, IWeatherResponse, IWeather, IEvent } from '@/types';
+import { Desriptions, minReqTime } from '@/constants';
+import { IEvent, ILocation, IWeather, IWeatherResponse } from '@/interfaces';
+import { TPayloadAction } from '@/types';
 
 
-export const checkTimer = (reqTime: number) => new Date().getTime() - reqTime > 3600000;
+export const checkTimer = (reqTime: number) => new Date().getTime() - reqTime > minReqTime;
 
 export const getLocation = async () => {
   const pos: any = await new Promise((resolve, reject) => {
@@ -15,7 +16,7 @@ export const getLocation = async () => {
 
 export const isLocation = (loc: TPayloadAction): loc is ILocation => typeof loc !== 'string';
 
-export const getFields = (arr: IWeatherResponse[]): IWeather[] => arr.map(
+export const getWeatherFields = (arr: IWeatherResponse[]): IWeather[] => arr.map(
   ({ max_temp, datetime, weather }) => ({
     temp: max_temp,
     datetime,
@@ -31,7 +32,26 @@ export const getEventFields = (arr: any[]): IEvent[] => arr.map(
   })
 );
 
-export const getDay = (datetime: string) => new Date(datetime).toString().slice(0, 3);
+export const getTime = (date: Date) => {
+  const time = date.toLocaleString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  });
+  return {
+    time: time.slice(0, -2),
+    timeFormat: time.slice(-2)
+  };
+};
+
+export const getDay = (date: Date) => date.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  weekday: 'long',
+  month: 'long',
+  year: 'numeric',
+});
+
+export const getWeekDay = (datetime: string) => new Date(datetime).toString().slice(0, 3);
 
 export const getImages = (description: string) => {
   const desc = description.toLocaleLowerCase();

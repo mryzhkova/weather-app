@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
+
 export const StyledButton = styled.button`
   background: none;
-  border: 1px solid #fff;
+  border: ${({ theme }) => theme.borders[0]};
   color: inherit;
-  font-weight: 100;
+  font-weight: ${({ theme }) => theme.fontWeight[0]};
   text-align: center;
-  margin-top: 10px;
-  height: 30px;
-  padding: 6px;
+  margin-top: ${({ theme }) => theme.spaces[3]}px;
+  height: 35px;
+  width: 100px;
+  padding: ${({ theme }) => theme.spaces[2]}px;
   cursor: pointer;
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray04};
@@ -17,11 +19,11 @@ export const StyledButton = styled.button`
 
 export const StyledInput = styled.input`
   height: 30px;
-  padding: 6px;
+  padding: ${({ theme }) => theme.spaces[2]}px;
   background: none;
-  border: 1px solid #fff;
+  border: ${({ theme }) => theme.borders[0]};
   color: inherit;
-  font-weight: 100;
+  font-weight: ${({ theme }) => theme.fontWeight[0]};
   &:focus {
     background-color: ${({ theme }) => theme.colors.gray04};
   }
@@ -34,6 +36,6 @@ export const StyledForm = styled.div`
   ${({ theme }) => theme.below.md`
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: ${theme.spaces[4]}px;
   `}
 `;

@@ -1,16 +1,12 @@
 import React, { FC } from 'react';
 
-import { StyledCalendarItem, StyledCalendarText, StyledCalendarTime } from './components';
-
-interface IProps {
-  time: string;
-  summary: string;
-}
+import { IProps } from './interfaces';
+import { StyledCalendarItem, StyledCalendarText, StyledCalendarTime } from './styled';
 
 
 const CalendarItem: FC<IProps> = ({ time, summary }): JSX.Element => (
   <StyledCalendarItem>
-    <StyledCalendarTime>{time}</StyledCalendarTime>
+    <StyledCalendarTime><span>{time}</span></StyledCalendarTime>
     <StyledCalendarText>{summary}</StyledCalendarText>
   </StyledCalendarItem>
 );

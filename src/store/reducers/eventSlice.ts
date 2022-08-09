@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getEventFields } from '@/helpers';
-import { IEventState } from '@/types';
+import { IEventState } from '@/interfaces';
 
 
 const initialState: IEventState = {

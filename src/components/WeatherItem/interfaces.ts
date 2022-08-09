@@ -1,4 +1,4 @@
-import { IWeather } from '@/types';
+import { IWeather } from '@/interfaces';
 
 
 export interface IProps {

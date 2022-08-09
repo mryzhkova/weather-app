@@ -1,12 +1,14 @@
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
 
+import { FormIds } from '@/constants';
 import { useTypedDispatch, useTypedSelector } from '@/hooks/storeHooks';
-import { getWeather } from '@/store/asyncActions';
-import { weatherActions } from '@/store/slices/weatherSlice';
+import { getWeather } from '@/store/actions';
+import { weatherActions } from '@/store/reducers/weatherSlice';
 
-import { StyledForm, StyledButton, StyledInput } from './components';
-import { FormValues } from './types';
+import { FormValues } from './interfaces';
+import { StyledForm, StyledButton, StyledInput } from './styled';
+
 
 const CustomForm = () => {
   const { city } = useTypedSelector(state => state.weatherState);
@@ -27,7 +29,7 @@ const CustomForm = () => {
     >
       <Form>
         <StyledForm>
-          <Field as={StyledInput} id="city" name="city" />
+          <Field as={StyledInput} id={FormIds.cityForm} name={FormIds.cityForm} />
           <StyledButton type="submit">Get weather</StyledButton>
         </StyledForm>
       </Form>

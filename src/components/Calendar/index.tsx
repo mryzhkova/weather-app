@@ -3,10 +3,11 @@ import React from 'react';
 import CalendarItem from '@/components/CalendarItem';
 import { apiCalendar } from '@/configs/googleApiConfig';
 import { useTypedDispatch, useTypedSelector } from '@/hooks/storeHooks';
-import { getEvents, signInGoogle } from '@/store/slices/eventSlice';
+import { IEvent } from '@/interfaces';
+import { getEvents, signInGoogle } from '@/store/reducers/eventSlice';
 
 
-import { StyledButton } from './components';
+import { StyledButton } from './styled';
 
 
 const Calendar = () => {
@@ -36,7 +37,7 @@ const Calendar = () => {
           Log-in Google
         </StyledButton>
       )}
-      {events.length !== 0 && events.map(event => (
+      {events.length !== 0 && events.map((event: IEvent) => (
         <CalendarItem
           key={event.id}
           time={event.time}

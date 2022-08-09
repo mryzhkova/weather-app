@@ -2,6 +2,10 @@ export enum ActionTypes {
   GET_WEATHER = 'GET-WEATHER'
 }
 
+export enum FormIds {
+  cityForm = 'city'
+}
+
 export enum Desriptions {
   stormy = 'light thunderstorm',
   storm = 'thunderstorm',
@@ -18,3 +22,4 @@ export enum Desriptions {
   scattered = 'scattered clouds'
 }
 
+export const minReqTime = 3600000;

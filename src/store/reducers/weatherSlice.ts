@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getFields } from '@/helpers';
-import { IWeatherResponse, IWeatherState, IListResponse } from '@/types';
+import { getWeatherFields } from '@/helpers';
+import { IListResponse, IWeatherResponse, IWeatherState } from '@/interfaces';
 
 
 const initialState: IWeatherState = {
@@ -29,7 +29,7 @@ export const weatherSlice = createSlice({
     },
     fetchWeather(state, action: PayloadAction<IListResponse<IWeatherResponse>>) {
       if (!action.payload.data) return;
-      const allWeather = getFields(action.payload.data);
+      const allWeather = getWeatherFields(action.payload.data);
       const [currentWeather] = allWeather;
       state.city = action.payload.city_name;
       state.currentWeather = currentWeather;

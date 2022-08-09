@@ -6,16 +6,19 @@ import FormCity from '@/components/CustomForm';
 import Clock from '@/components/Date';
 import Loader from '@/components/Loader';
 import Weather from '@/components/Weather';
+import { minReqTime } from '@/constants';
 import { checkTimer, getLocation } from '@/helpers';
 import { useTypedDispatch, useTypedSelector } from '@/hooks/storeHooks';
-import { getWeather } from '@/store/asyncActions';
-import { weatherActions } from '@/store/slices/weatherSlice';
+import { getWeather } from '@/store/actions';
+import { weatherActions } from '@/store/reducers/weatherSlice';
 import { defaultTheme } from '@/theme';
 
-import { AppWrapper, ContentWrapper, CalendarWrappper } from './components';
+import { AppWrapper, ContentWrapper, CalendarWrappper } from './styled';
 
 const App = () => {
   const dispatch = useTypedDispatch();
+
+  const { setRequestTime } = weatherActions;
 
   const { description } = useTypedSelector(
     state => state.weatherState.currentWeather
@@ -27,21 +30,20 @@ const App = () => {
     const fetchByLocation = async () => {
       const pos = await getLocation();
       dispatch(getWeather(pos));
-      dispatch(weatherActions.setRequestTime(new Date().getTime()));
+      dispatch(setRequestTime(new Date().getTime()));
     };
     if (checkTimer(reqTime)) fetchByLocation();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       dispatch(getWeather(city));
-      dispatch(weatherActions.setRequestTime(new Date().getTime()));
-    }, 3600000);
+      dispatch(setRequestTime(new Date().getTime()));
+    }, minReqTime);
     return () => {
       clearInterval(intervalId);
     };
-  }, [dispatch, city]);
+  }, [city]);
 
   if (isLoading) return <Loader />;
 

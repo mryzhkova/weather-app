@@ -3,9 +3,9 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 
+import eventSliceReducer from '@/store/reducers/eventSlice';
+import weatherSliceReducer from '@/store/reducers/weatherSlice';
 import { rootSaga } from '@/store/saga';
-import eventSliceReducer from '@/store/slices/eventSlice';
-import weatherSliceReducer from '@/store/slices/weatherSlice';
 
 const persistConfig = {
   key: 'root',

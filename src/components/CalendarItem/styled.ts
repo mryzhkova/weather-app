@@ -4,7 +4,8 @@ import styled from 'styled-components';
 export const StyledCalendarItem = styled.div`
   display: flex;
   position: relative;
-  font-weight: 300;
+  font-weight: ${({ theme }) => theme.fontWeight[1]};
+  margin-bottom: ${({ theme }) => theme.spaces[3]}px;
   &:not(:last-child)::after {
     content: '';
     height: 25px;
@@ -19,23 +20,23 @@ export const StyledCalendarItem = styled.div`
     `}
   } 
   ${({ theme }) => theme.below.md`
-    margin-bottom: 10px;
+    margin-bottom: ${theme.spaces[4]};
   `}
 `;
 
 export const StyledCalendarTime = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${({ theme }) => theme.spaces[1]}px;
   background-color: ${({ theme }) => theme.colors.gray};
-  margin-right: 20px;
-  margin-bottom: 20px;
-  padding: 4px 10px;
+  margin-right: ${({ theme }) => theme.spaces[3]}px;
   width: 55px;
-  font-size: 0.85em;
-  border-radius: 15px;
-  text-align: center;
+  font-size: ${({ theme }) => theme.fontSizes[0]}px;
+  border-radius: ${({ theme }) => theme.borderRadius[0]}px;
 `;
 
 export const StyledCalendarText = styled.div`
-  padding: 2px;
   text-overflow: ellipsis;
   max-width: 300px;
   ${({ theme }) => theme.below.md`
