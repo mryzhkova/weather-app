@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getImages } from '@/helpers';
+import { getImages } from '@/helpers/weatherHelpers';
 
 
 export const AppWrapper = styled.div<{ weatherDesc: string }>`
@@ -40,3 +40,5 @@ export const CalendarWrappper = styled.div`
     text-align: center;
   `}
 `;
+
+export const StyledMenu = styled.div``;

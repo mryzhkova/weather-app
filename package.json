@@ -50,6 +50,7 @@
     "react-dom": "^18.2.0",
     "react-google-calendar-api": "^2.0.3",
     "react-loader-spinner": "^5.1.7-beta.1",
+    "react-radio-group": "^3.0.3",
     "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
@@ -60,6 +61,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@types/react-radio-group": "^3.0.4",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "craco-alias": "^3.0.1",

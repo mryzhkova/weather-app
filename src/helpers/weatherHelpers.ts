@@ -1,20 +1,8 @@
 import * as icons from '@/assets/icons';
 import * as imgs from '@/assets/images';
-import { Desriptions, minReqTime } from '@/constants';
-import { IEvent, ILocation, IWeather, IWeatherResponse } from '@/interfaces';
-import { TPayloadAction } from '@/types';
+import { Desriptions } from '@/constants';
+import { IWeather, IWeatherResponse } from '@/interfaces';
 
-
-export const checkTimer = (reqTime: number) => new Date().getTime() - reqTime > minReqTime;
-
-export const getLocation = async () => {
-  const pos: any = await new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
-  return { lat: pos.coords.latitude, lon: pos.coords.longitude };
-};
-
-export const isLocation = (loc: TPayloadAction): loc is ILocation => typeof loc !== 'string';
 
 export const getWeatherFields = (arr: IWeatherResponse[]): IWeather[] => arr.map(
   ({ max_temp, datetime, weather }) => ({
@@ -24,32 +12,16 @@ export const getWeatherFields = (arr: IWeatherResponse[]): IWeather[] => arr.map
   })
 );
 
-export const getEventFields = (arr: any[]): IEvent[] => arr.map(
-  ({ start, summary, id }) => ({
-    id,
-    summary,
-    time: start.dateTime.slice(11, 16)
-  })
-);
-
-export const getTime = (date: Date) => {
-  const time = date.toLocaleString('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  });
-  return {
-    time: time.slice(0, -2),
-    timeFormat: time.slice(-2)
-  };
+export const getHourlyWeatherFields = (arr: any[]): IWeather[] => {
+  const currentTime = new Date().getHours();
+  const newarr = [...arr[0].hours, ...arr[1].hours];
+  const idx = newarr.findIndex(({ datetime }) => datetime.includes(currentTime));
+  return newarr.splice(idx, 7).map(({ datetime, temp, conditions }) => ({
+    datetime,
+    temp,
+    description: conditions
+  }));
 };
-
-export const getDay = (date: Date) => date.toLocaleDateString('en-GB', {
-  day: 'numeric',
-  weekday: 'long',
-  month: 'long',
-  year: 'numeric',
-});
 
 export const getWeekDay = (datetime: string) => new Date(datetime).toString().slice(0, 3);
 

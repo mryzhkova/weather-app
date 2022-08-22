@@ -1,15 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getWeatherFields } from '@/helpers';
-import { IListResponse, IWeatherResponse, IWeatherState } from '@/interfaces';
+import { Mode } from '@/constants';
+import { getHourlyWeatherFields, getWeatherFields } from '@/helpers/weatherHelpers';
+import { IHourlyWeatherResponse, IListResponse, IWeatherResponse, IWeatherState } from '@/interfaces';
 
 
 const initialState: IWeatherState = {
+  todaytWeather: {
+    temp: 0,
+    description: '',
+    datetime: '',
+  },
   currentWeather: {
     temp: 0,
     description: '',
     datetime: '',
   },
+  hourlyWeather: [],
   weather: [],
   isLoading: false,
   response: {
@@ -17,7 +24,8 @@ const initialState: IWeatherState = {
     message: '',
   },
   city: '',
-  reqTime: 0
+  reqTime: 0,
+  weatherMode: Mode.daily
 };
 
 export const weatherSlice = createSlice({
@@ -30,10 +38,17 @@ export const weatherSlice = createSlice({
     fetchWeather(state, action: PayloadAction<IListResponse<IWeatherResponse>>) {
       if (!action.payload.data) return;
       const allWeather = getWeatherFields(action.payload.data);
-      const [currentWeather] = allWeather;
+      const [todaytWeather] = allWeather;
       state.city = action.payload.city_name;
-      state.currentWeather = currentWeather;
+      state.todaytWeather = todaytWeather;
       state.weather = allWeather.slice(1);
+    },
+    fetchHourlyWeather(state, action: PayloadAction<IHourlyWeatherResponse>) {
+      if (!action.payload) return;
+      const allWeather = getHourlyWeatherFields(action.payload.days);
+      const [currentWeather] = allWeather;
+      state.currentWeather = currentWeather;
+      state.hourlyWeather = allWeather.slice(1);
     },
     fetchWeatherEnd(state, action) {
       state.isLoading = false;
@@ -44,6 +59,9 @@ export const weatherSlice = createSlice({
     },
     setRequestTime(state, action: PayloadAction<number>) {
       state.reqTime = action.payload;
+    },
+    setWeatherMode(state, action: PayloadAction<string>) {
+      state.weatherMode = action.payload;
     }
   },
 });

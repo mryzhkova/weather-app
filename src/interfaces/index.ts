@@ -4,12 +4,15 @@ import type { TPayloadAction } from '@/types';
 
 
 export interface IWeatherState {
+  todaytWeather: IWeather;
   currentWeather: IWeather;
+  hourlyWeather: IWeather[];
   weather: IWeather[];
   isLoading: boolean;
   response: IResponse;
   city: string;
   reqTime: number;
+  weatherMode: string;
 }
 
 export interface IWeatherResponse {
@@ -18,6 +21,10 @@ export interface IWeatherResponse {
     description: string;
   }
   datetime: string;
+}
+
+export interface IHourlyWeatherResponse {
+  days: []
 }
 
 export interface IResponse {

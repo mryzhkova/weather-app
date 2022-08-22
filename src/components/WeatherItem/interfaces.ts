@@ -2,6 +2,7 @@ import { IWeather } from '@/interfaces';
 
 
 export interface IProps {
-  dayParams: IWeather,
-  currentItem?: boolean
+  dayParams: IWeather;
+  mode: string;
+  currentItem?: boolean;
 }

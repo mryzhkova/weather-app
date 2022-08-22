@@ -7,7 +7,7 @@ import { getWeather } from '@/store/actions';
 import { weatherActions } from '@/store/reducers/weatherSlice';
 
 import { FormValues } from './interfaces';
-import { StyledForm, StyledButton, StyledInput } from './styled';
+import { StyledForm, StyledButton, StyledInput, CustomLebel } from './styled';
 
 
 const CustomForm = () => {
@@ -29,7 +29,10 @@ const CustomForm = () => {
     >
       <Form>
         <StyledForm>
-          <Field as={StyledInput} id={FormIds.cityForm} name={FormIds.cityForm} />
+          <CustomLebel htmlFor={FormIds.cityForm}>
+            <Field as={StyledInput} id={FormIds.cityForm} name={FormIds.cityForm} />
+            Current location:
+          </CustomLebel>
           <StyledButton type="submit">Get weather</StyledButton>
         </StyledForm>
       </Form>

@@ -4,28 +4,31 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 import weatherApi from '@/axios/weatherApi';
 import { ActionTypes } from '@/constants';
-import { isLocation } from '@/helpers';
-import { IListResponse, IWeatherResponse } from '@/interfaces';
+import { isLocation } from '@/helpers/helpers';
+import { IHourlyWeatherResponse, IListResponse, IWeatherResponse } from '@/interfaces';
 import { weatherActions } from '@/store/reducers/weatherSlice';
 import { TPayloadAction } from '@/types';
 
 
-const { fetchWeatherStart, fetchWeatherEnd, fetchWeather } = weatherActions;
+const { fetchWeatherStart, fetchWeatherEnd, fetchWeather, fetchHourlyWeather } = weatherActions;
 
-const { getByLocation, getByCity } = weatherApi;
-
+const { getByLocation, getByCity, getHourlyByCity, getHourlyByLocation } = weatherApi;
 
 function* getWeather(action: PayloadAction<TPayloadAction>) {
   try {
     yield put(fetchWeatherStart());
-    let response: AxiosResponse<IListResponse<IWeatherResponse>>;
+    let weatherResponse: AxiosResponse<IListResponse<IWeatherResponse>>;
+    let hourlyWeatherResponse: AxiosResponse<IHourlyWeatherResponse>;
     if (isLocation(action.payload)) {
-      response = yield call(getByLocation, action.payload);
+      weatherResponse = yield call(getByLocation, action.payload);
+      hourlyWeatherResponse = yield call(getHourlyByLocation, action.payload);
     } else {
-      response = yield call(getByCity, action.payload);
+      weatherResponse = yield call(getByCity, action.payload);
+      hourlyWeatherResponse = yield call(getHourlyByCity, action.payload);
     }
-    yield put(fetchWeather(response.data));
-    yield put(fetchWeatherEnd(response));
+    yield put(fetchWeather(weatherResponse.data));
+    yield put(fetchHourlyWeather(hourlyWeatherResponse.data));
+    yield put(fetchWeatherEnd(weatherResponse));
   } catch (error: any) {
     yield put(fetchWeatherEnd(error.response));
   }

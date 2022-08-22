@@ -6,6 +6,11 @@ export enum FormIds {
   cityForm = 'city'
 }
 
+export enum Mode {
+  daily = 'Daily',
+  hourly = 'Hourly'
+}
+
 export enum Desriptions {
   stormy = 'light thunderstorm',
   storm = 'thunderstorm',
@@ -17,9 +22,9 @@ export enum Desriptions {
   heze = 'haze',
   mist = 'mist',
   clear = 'clear',
-  cloud = 'clouds',
-  cloudy = 'few clouds',
-  scattered = 'scattered clouds'
+  cloud = 'cloud',
+  cloudy = 'few cloud',
+  scattered = 'scattered cloud'
 }
 
 export const minReqTime = 3600000;

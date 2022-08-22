@@ -3,17 +3,18 @@ import { ThemeProvider } from 'styled-components';
 
 import Calendar from '@/components/Calendar';
 import FormCity from '@/components/CustomForm';
+import WeatherMode from '@/components/CustomRadio';
 import Clock from '@/components/Date';
 import Loader from '@/components/Loader';
 import Weather from '@/components/Weather';
 import { minReqTime } from '@/constants';
-import { checkTimer, getLocation } from '@/helpers';
+import { checkTimer, getLocation } from '@/helpers/helpers';
 import { useTypedDispatch, useTypedSelector } from '@/hooks/storeHooks';
 import { getWeather } from '@/store/actions';
 import { weatherActions } from '@/store/reducers/weatherSlice';
 import { defaultTheme } from '@/theme';
 
-import { AppWrapper, ContentWrapper, CalendarWrappper } from './styled';
+import { AppWrapper, ContentWrapper, CalendarWrappper, StyledMenu } from './styled';
 
 const App = () => {
   const dispatch = useTypedDispatch();
@@ -21,7 +22,7 @@ const App = () => {
   const { setRequestTime } = weatherActions;
 
   const { description } = useTypedSelector(
-    state => state.weatherState.currentWeather
+    state => state.weatherState.todaytWeather
   );
 
   const { isLoading, reqTime, city } = useTypedSelector(state => state.weatherState);
@@ -55,7 +56,10 @@ const App = () => {
             <Clock />
             <Calendar />
           </CalendarWrappper>
-          <FormCity />
+          <StyledMenu>
+            <WeatherMode />
+            <FormCity />
+          </StyledMenu>
         </ContentWrapper>
         <Weather />
       </AppWrapper>

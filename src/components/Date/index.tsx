@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import { getDay, getTime } from '@/helpers';
+import { getDay, getTime } from '@/helpers/eventHelpers';
+
 
 import { DayWrapper, StyledDate, Time } from './styled';
 

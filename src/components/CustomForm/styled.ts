@@ -17,6 +17,14 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const CustomLebel = styled.label`
+  display: flex;
+  flex-direction: column-reverse;
+  font-weight: ${({ theme }) => theme.fontWeight[0]};
+  font-size: ${({ theme }) => theme.fontSizes[0]}px;
+`;
+
+
 export const StyledInput = styled.input`
   height: 30px;
   padding: ${({ theme }) => theme.spaces[2]}px;

@@ -44,7 +44,7 @@ export const StyledDay = styled.div<{ currentItem?: boolean }>`
   background-color: ${({ theme }) => theme.colors.darkGray};
   padding: ${({ theme }) => theme.spaces[1]}px
     ${({ theme }) => theme.spaces[2]}px;
-  min-width: 46px;
+  min-width: 47px;
   font-size: ${({ theme }) => theme.fontSizes[0]}px;
   font-weight: ${({ theme }) => theme.fontWeight[0]};
   border-radius: ${({ theme }) => theme.borderRadius[0]}px;
