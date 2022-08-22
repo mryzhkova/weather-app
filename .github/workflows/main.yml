@@ -17,6 +17,8 @@ jobs:
           REACT_APP_GOOGLE_API_KEY: ${{ secrets.REACT_APP_GOOGLE_API_KEY }}
           REACT_APP_WEATHER_API_URL: ${{ secrets.REACT_APP_WEATHER_API_URL }}
           REACT_APP_WEATHER_API_KEY: ${{ secrets.REACT_APP_WEATHER_API_KEY }}
+          REACT_APP_HOURLY_WEATHER_API_URL: ${{ secrets.REACT_APP_HOURLY_WEATHER_API_URL }}
+          REACT_APP_HOURLY_WEATHER_API_KEY: ${{ secrets.REACT_APP_HOURLY_WEATHER_API_KEY }}
         run: |
           npm install --legacy-peer-deps
           npm run-script build
